@@ -80,7 +80,8 @@ if [[ "$A" == "WGPORT" || "$A" == "WGPORTACK" ]]; then
         # Add Interface to WG
         echo "interface wg${index}" |  socat - TCP6:[::1]:999 > /dev/null
 
-         ip -6 address add dev  wg${index} scope link $ipv6/12
+         ip -6 address add dev  wg${index} scope link $ipv6/128
+         ip -6 address add dev wg${index} scope link fe80::$((1 + RANDOM % 99))$((1 + RANDOM % 99)):$((1 + RANDOM % 99))$((1 + RANDOM % 99)):$((1 + RANDOM % 99))$((1 + RANDOM % 99)):$((1 + RANDOM % 99))${index}/64
 
 #       if [ -z "$(ip addr show dev wg${index}  | grep inet6\ fe)" ]; then
 #          ip="$(echo $ipv6 | cut -d ":" -f5-8)"
