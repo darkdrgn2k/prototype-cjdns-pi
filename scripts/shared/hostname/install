@@ -17,6 +17,15 @@ if ! [ -z "$(ifconfig  | grep ygg0:)" ]; then
     fi
 fi
 
+# Define hostname based off Babel WG if YGG and CJDNS isn't installed
+if ! [ -f "/etc/wg" ]; then
+    # Define new hostname
+    if [ -z "${NEWHOSTNAME}" ]; then
+        source /etc/wg
+        NEWHOSTNAME=$(echo $ipv6 | sed 's/[",]//g' | sed "s/.*:/$MESH_NAME-B/g")
+    fi
+fi
+
 # Set node name
 if ! [ -z "${NEWHOSTNAME}" ]; then
     # Rename node based on new hostname
