@@ -96,7 +96,7 @@ if [ "$(checkModule 'WITH_DIALOG')" ]; then
     sudo apt-get install dialog -y
 fi
 
-askSelection "Select node install type" "A Basic node\nB IPFS Node\nC Monitor Node\nD SSB Node\nE Camera Node\nF Raspberry Pi Adhoc (Experimental)\nZ Custom Node"
+askSelection "Select node install type" "A Basic node\nB IPFS Node\nC Monitor Node\nD SSB Node\nE Camera Node\nF Raspberry Pi Adhoc (Experimental)\nY Babel over Wirguard Experimental\nZ Custom Node"
 
 case "$dialogREPLY" in
     "A")
@@ -219,6 +219,26 @@ case "$dialogREPLY" in
         WITH_SSB_PATCHFOO=false
         WITH_IPFS_PI_STREAM=false
     ;;
+    "Y")
+        echo "Wireguard over Babled"
+	WITH_BABELD_WG=true
+	WITH_CJDNS=false
+        WITH_YGGDRASIL=false
+        WITH_YGGDRASIL_IPTUNNEL=false
+        WITH_MESH_POINT=""
+        WITH_WIFI_AP=""
+        WITH_FIREWALL=false
+        WITH_CJDNS_IPTUNNEL=false
+        WITH_IPFS=false
+        WITH_PROMETHEUS_NODE_EXPORTER=true
+        WITH_EXTRA_TOOLS=false
+        WITH_WATCHDOG=true
+        WITH_YRD=false
+        WITH_PROMETHEUS_SERVER=false
+        WITH_GRAFANA=false
+        WITH_SSB=false
+        WITH_SSB_WEB=false
+        WITH_IPFS_PI_STREAM=false
     "Z")
     ;;
     *)
@@ -249,6 +269,8 @@ askModule "WITH_YGGDRASIL" "Yggdrasil routing engine"
 if [ "$WITH_YGGDRASIL" == "true" ]; then
     askModule "WITH_YGGDRASIL_IPTUNNEL" "Internet Gateway over Yggdrasil"
 fi
+askModule "WITH_BABELD_WG" "Babled over Wirguard routing engine"
+
 askModule "WITH_MESH_POINT" "Mesh Point Interface"
 if [ "$WITH_MESH_POINT" == false ]; then
     askModule "WITH_AD_HOC" "Ad-Hoc Interface"
@@ -322,6 +344,11 @@ fi
 if [ "$(checkModule 'WITH_YGGDRASIL_IPTUNNEL')" ]; then
     source yggdrasil-iptunnel/install
 fi
+# Configure Wireguard over Babeld
+if [ "$(checkModule 'WITH_BABELD_WG')" ]; then
+    source babeld-wg/install
+fi
+
 # IPFS
 if [ ! -x "$(command -v ipfs)" ] && [ "$(checkModule 'WITH_IPFS')" ]; then
     source ipfs/install
