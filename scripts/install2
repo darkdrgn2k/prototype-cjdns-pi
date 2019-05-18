@@ -364,7 +364,7 @@ if [ "$(checkModule 'WITH_YGGDRASIL_IPTUNNEL')" ]; then
 fi
 # Configure Wireguard over Babeld
 if [ "$(checkModule 'WITH_BABELD_WG')" ]; then
-    source babeld-wg/install
+    source babel-wg/install
 fi
 # IPFS
 if [ ! -x "$(command -v ipfs)" ] && [ "$(checkModule 'WITH_IPFS')" ]; then
