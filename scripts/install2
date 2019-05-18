@@ -252,6 +252,7 @@ case "$dialogREPLY" in
         WITH_SSB=false
         WITH_SSB_WEB=false
         WITH_IPFS_PI_STREAM=false
+    ;;
     "Z")
     ;;
     *)
