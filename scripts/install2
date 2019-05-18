@@ -344,11 +344,6 @@ fi
 if [ "$(checkModule 'WITH_YGGDRASIL_IPTUNNEL')" ]; then
     source yggdrasil-iptunnel/install
 fi
-# Configure Wireguard over Babeld
-if [ "$(checkModule 'WITH_BABELD_WG')" ]; then
-    source babeld-wg/install
-fi
-
 # IPFS
 if [ ! -x "$(command -v ipfs)" ] && [ "$(checkModule 'WITH_IPFS')" ]; then
     source ipfs/install
