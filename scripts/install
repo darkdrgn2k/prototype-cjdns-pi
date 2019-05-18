@@ -69,6 +69,7 @@ export WITH_SSB
 export WITH_SSB_PATCHFOO
 export WITH_SSB_WEB_PI
 export WITH_IPFS_PI_STREAM
+export WITH_BABELD_WG
 
 export UNATTENDED
 # Run the actual installation script
