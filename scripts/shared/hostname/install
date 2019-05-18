@@ -18,7 +18,7 @@ if ! [ -z "$(ifconfig  | grep ygg0:)" ]; then
 fi
 
 # Define hostname based off Babel WG if YGG and CJDNS isn't installed
-if ! [ -f "/etc/wg" ]; then
+if [ -f "/etc/wg" ]; then
     # Define new hostname
     if [ -z "${NEWHOSTNAME}" ]; then
         source /etc/wg
