@@ -133,3 +133,14 @@ if [ "$(which yggdrasil)" ]  && [ "$(ip addr | grep ygg0)" ]; then
     sudo yggdrasilctl getPeers | grep -v "$YGGIP" | awk '{print $1}' | grep -v "bytes_recvd"
     echo -e '---------------------------------------'
 fi
+
+if [ -f "/etc/wg" ]; then
+    source /etc/wg
+    echo -e '---------------------------------------'
+    echo -e 'BABELD-WG NODE'
+    echo -e $ipv6
+    echo -e '---------------------------------------'
+    echo -e 'BABELD-WG PEERS'
+    echo "dump" | socat - TCP6:[::1]:999 | grep "add route" | grep "refmetric 128" | awk '{print $5}'
+    echo -e '---------------------------------------'
+fi
