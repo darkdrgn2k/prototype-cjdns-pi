@@ -44,6 +44,10 @@ ipv6=0${key:0:31}
 echo ipv6=${ipv6:0:4}:${ipv6:4:4}:${ipv6:8:4}:${ipv6:12:4}:${ipv6:16:4}:${ipv6:20:4}:${ipv6:24:4}:${ipv6:28:4} >> /tmp/wg
 sudo mv /tmp/wg /etc/wg
 
+echo redistribute ip $ipv6 metric 128 > /tmp/babeld.conf
+echo redistribute local deny >> /tmp/babeld.conf
+sudo mv /tmp/babeld.conf /etc/babeld.conf
+
 # Install services  
 sudo cp ${BASE_DIR}/mcast-process-wg.sh /usr/local/sbin/mcast-process-wg.sh
 sudo chmod +x /usr/local/sbin/mcast-process-wg.sh
