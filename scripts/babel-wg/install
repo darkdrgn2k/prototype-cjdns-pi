@@ -3,9 +3,9 @@
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Install needed debian key-ring keys
-sudo apt-get install -y debian-keyring debian-archive-keyring
-gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010     
-gpg -a --export 7638D0442B90D010 | sudo apt-key add -
+#sudo apt-get install -y debian-keyring debian-archive-keyring
+#gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010     
+#gpg -a --export 7638D0442B90D010 | sudo apt-key add -
 
 # Enable required debian packages
 echo "deb http://deb.debian.org/debian/ unstable main" | sudo tee --append /etc/apt/sources.list.d/unstable.list > /dev/null
