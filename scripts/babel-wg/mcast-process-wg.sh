@@ -1,7 +1,9 @@
 #!/bin/bash
+# Script is triggered by socat's babel-wg-peer.service every time a new connection is made
+# it processed the incoming information and acts accordingly
+
 
 # Collect IP address information passed by socat
-
 # Remote IP address
 SOCAT_PEERADDR=$(echo "$SOCAT_PEERADDR" | tr -d \[ | tr -d \]) 
 # Local IP address
