@@ -96,7 +96,7 @@ if [ "$(checkModule 'WITH_DIALOG')" ]; then
     sudo apt-get install dialog -y
 fi
 
-askSelection "Select node install type" "A Basic node\nB IPFS Node\nC Monitor Node\nD SSB Node\nE Camera Node\nF Raspberry Pi Adhoc (Experimental)\nZ Custom Node"
+askSelection "Select node install type" "A Basic node\nB IPFS Node\nC Monitor Node\nD SSB Node\nE Camera Node\nF Raspberry Pi Adhoc (Experimental)\nG Babeld Node\nZ Custom Node"
 
 case "$dialogREPLY" in
     "A")
@@ -223,6 +223,27 @@ case "$dialogREPLY" in
         WITH_GRAFANA=false
         WITH_SSB=false
         WITH_SSB_PATCHFOO=false
+        WITH_IPFS_PI_STREAM=false
+    ;;
+    "G")
+        echo "Babeld node"
+	WITH_CJDNS=false
+        WITH_YGGDRASIL=false
+        WITH_YGGDRASIL_IPTUNNEL=false
+	WITH_BABELD=true
+        WITH_MESH_POINT=""
+        WITH_WIFI_AP=""
+        WITH_FIREWALL=true
+        WITH_CJDNS_IPTUNNEL=false
+        WITH_IPFS=false
+        WITH_PROMETHEUS_NODE_EXPORTER=true
+        WITH_EXTRA_TOOLS=true
+        WITH_WATCHDOG=true
+        WITH_YRD=false
+        WITH_PROMETHEUS_SERVER=false
+        WITH_GRAFANA=false
+        WITH_SSB=false
+        WITH_SSB_WEB=false
         WITH_IPFS_PI_STREAM=false
     ;;
     "Z")
