@@ -17,6 +17,15 @@ if ! [ -z "$(ifconfig  | grep ygg0:)" ]; then
     fi
 fi
 
+# Define hostname based off Yggdrasil if CJDNS isn't installed
+BABELD=$(confget -f /etc/mesh.conf -s general "ipv4")
+if ! [ -z "$BABELD" ]; then
+    # Define new hostname
+    if [ -z "${NEWHOSTNAME}" ]; then
+        NEWHOSTNAME=$MESHNAME-b$(echo $BABELD | cut -d "." -f 2)$(echo $BABELD | cut -d "." -f 3)
+    fi
+fi
+
 # Set node name
 if ! [ -z "${NEWHOSTNAME}" ]; then
     # Rename node based on new hostname

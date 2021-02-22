@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo systemctl stop babeld
+rm -rf /etc/apt/sources.list.d/tomesh.list
+sudo apt-get -y remove babeld
+rm -rf /etc/babeld.conf
+confset general ipv4 "" /etc/mesh.conf
